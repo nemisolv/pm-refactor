@@ -1,0 +1,24 @@
+spring:
+  kafka:
+    producer:
+     bootstrap-address: localhost:29092
+     max-request-size: 10485880
+     topics: preprocessing
+     num-partitions: 1
+     replication-factor: 1
+     new-format-topic: preprocessingnewformat
+    consumer:
+      bootstrap-address: localhost:29092
+      group-id: pm
+      enable-auto-commit-config: false
+      auto_commit-interval-ms-config: 100
+      session-timeout-ms-config: 15000
+      auto-offset-reset-config: earliest
+      fetch-max-bytes: 10485880
+      max-pool-records: 300
+      idle-before-reconnect-ms: 10000
+      topics: 5gaccess
+      ont: 
+        group: KPICOLLECTORGR
+        topic: KPICOLLECTORRECEIVE
+    schema.registry.url: http://localhost:8081

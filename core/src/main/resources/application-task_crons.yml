@@ -1,0 +1,18 @@
+#systems:
+#  taskCrons:
+#    SYSTEM_5GC.remainingPreCounterFileHandler: "50 */5 * * * *"
+#    SYSTEM_5GC.remainingPreCounterFileHandlerClickhouse: "0 */1 * * * *"
+#    SYSTEM_5GC.updateCounterInfo: "50 0/1 * * * ?"
+#    SYSTEM_5GC.voteInstanceProcessing:  "50 0/1 * * * ?"
+#
+#    SYSTEM_5GA.remainingPreCounterFileHandler: "50 */5 * * * *"
+#    SYSTEM_5GA.remainingPreCounterFileHandlerClickhouse: "0 */1 * * * *"
+#    SYSTEM_5GA.updateCounterInfo: "50 0/1 * * * ?"
+#    SYSTEM_5GA.voteInstanceProcessing: "50 0/1 * * * ?"
+#
+#
+#    SYSTEM_4GA.remainingPreCounterFileHandler: "0 */1 * * * *"
+#    SYSTEM_4GA.remainingPreCounterFileHandlerClickhouse: "0 */1 * * * *"
+#    SYSTEM_4GA.updateCounterInfo: "50 0/1 * * * ?"
+#    SYSTEM_4GA.voteInstanceProcessing: "50 0/1 * * * ?"
+#

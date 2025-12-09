@@ -1,0 +1,32 @@
+systems:
+  configs:
+    SYSTEM_5GC:
+      datasources:
+        PRIMARY:
+          url: jdbc:mysql://localhost:3306/pm_core?useSSL=false&serverTimezone=UTC
+          username: root
+          password: nam123
+          driverClassName: com.mysql.cj.jdbc.Driver
+          maximumPoolSize: 15
+          connectionTimeoutMs: 60000
+        CLICKHOUSE:
+          url: jdbc:clickhouse://localhost:8123/pm_core
+          username: default
+          password: nam123
+          driverClassName: com.clickhouse.jdbc.ClickHouseDriver
+          maximumPoolSize: 10
+          connectionTimeoutMs: 60000
+      primaryDatasource: PRIMARY
+      deploy: true
+      custom:
+        filesHandlingPerCycle: 20000
+        immediateRunDelaySecond: 10
+        scheduleScan: "59 */5 * * * *"
+        ftpDoneFolder: Done
+        isUsingClickhouse: true
+        isUsingMySQL: true
+        consumerThreads: 30
+        clickHouseDatabase: pm_core
+        isAutoAddingColumn: false
+        serviceName: 5GC
+

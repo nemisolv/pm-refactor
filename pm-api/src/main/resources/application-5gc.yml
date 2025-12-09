@@ -1,0 +1,22 @@
+systemsapi:
+  configs:
+    SYSTEM_5GC:
+      datasources:
+        KPI:
+          url: jdbc:mysql://aljsdf
+          username:
+          password:
+          driverClassName:
+        CLICKHOUSE:
+          url: jdbc:mysql://aljsdf
+          username:
+          password:
+          driverClassName:
+
+      primaryDatasource: KPI
+      deploy: false
+      # All values must follow camelCase styling.
+      custom:
+        db: clickhouse
+        isUsingCaching: false
+

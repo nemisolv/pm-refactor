@@ -1,0 +1,55 @@
+spring:
+  ftp:
+   folder_name_done: Done
+   folder_name_clickhouse: ClickHouse
+  ipha:
+    host: 127.0.0.1
+  pm:
+    cron:
+      immediate-run-delay: 10         # Chạy ngay sau 10s khởi động
+    precounter_queue_size: 30000
+    pool_size: 10
+    ftp-max-pool-size: 10              # Max FTP connections (must be <= vsftpd passive port limit)
+    threshold_warning_queue_size: 1000
+    limit-maximum-file: 10000
+    limit-maximum-file-clickhouse: 5000
+    ne-ids-queue-size: 10000
+    queue-ont-envelop-size: 1000
+    pool-ont-envelop-size: 1000
+    pool-ont-envelop-size-queue: 100
+    pool-ont-envelop-size-max: 100
+    pool-ont-envelop-flush-time-delay: 10000
+    cron-reload-data-init: "30 58 * * * ?"
+    cron-schedule-file: "0 0/ * * * ?"
+    max-number-of-file-to-push: 1000
+    is-preprocessing-data: false
+    counter_id: "151,152,153,154,155"
+    ue_ethernet: "Ethernet Statistics"
+    ue_wifi: "Wifi Client"
+    wifi_client_code: "wifi_client"
+    wifi_24ghz: "2.4 GHz"
+    wifi_5ghz: "5GHz"
+    counter_cat_id_parse: "101,102,103,104,105,106,107,108"
+    clickhouse_cluster: none
+    cache-interval: 5_minutes,15_minutes,30_minutes,1_hour,1_day
+    ont:
+      counter_cat_order: Wifi Statistics,Wifi Client,Ethernet Statistics,Device Host
+  fm:
+    url-report: http://172.16.28.197:8080/fm/event/report
+
+  datalake:
+    counter_cat_id: "101,102,103,104,105,106,107,108"
+    ftp-oss-code: "ACS"
+    ftp-server-type: "data_lake"
+    cron-swtich-file: "0 0 0/1 * * ?"
+    cron-push-left-file: "0 15/30 * * * ?"
+    max-file-per-push: 20
+    url-send-data-lake: "http://10.30.185.40:8010/nms-api/data-lake/post-file-to-fp"
+    enable-push: true
+
+
+
+zookeeper:
+  connectionString: "localhost:22181"
+
+

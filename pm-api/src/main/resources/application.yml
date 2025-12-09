@@ -1,0 +1,73 @@
+spring:
+  profiles:
+    active: 4ga, 5ga, 5gc, statistics
+  zookeeper:
+    connection-url: 172.16.28.126:2181
+    leader-path: /pm/api-1/dev
+  kafka:
+    bootstrap-address: 172.16.30.126:9092
+    enable-auto-commit-config: true
+    auto_commit-internal-ms-config: 1000
+    session-timeout-ms-config: 30000
+    auto-offset-reset-config: earliest
+    command-timeout-ms-config: 30000
+    schema.registry.url: http://172.16.30.126:8042
+  mail:
+    host: 10.60.19.48
+    port: 465
+    username: namvh46@viettel.com.vn
+    password: 12
+    footer: alsfjsfdsljdflasjdflasjflasdfjasdf
+    properties:
+      mail:
+        retry: 3
+        smtp:
+          auth: true
+          connection-timeout: 60000
+          starttls:
+            enable: true
+          ssl:
+            trust: 10.6233.2323
+            enable: true
+          timeout: 60000
+          writetimeout: 60000
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+
+  valid-time-caching:
+    expired-date:
+      min-hour: 2323232
+      day: 23232323
+      week: 233223
+  haipAddress:
+    host: 127.0.0.1
+  dbType: clickhouse
+
+server:
+  port: 8083
+shift-time:
+  min15: 15
+  min30: 30
+  min60: 60
+  min1440: 1440
+is-hdcaching-ready: false
+cron-schedule: "0 * * * * ?"
+
+is_pm_ont: true
+cron_update_log: "0 30/60 * * * ?"
+
+concurrent-session-config:
+  topic-name: Session
+  service-name: PM
+  process-name: PM-0
+  partition: 0
+  max-queue: 99999
+  active: true
+  send-request: false

@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Định nghĩa các biến -->
+    <property name="LOGS_PATH" value="./logs" />
+    <property name="LOG_FILE_NAME" value="pm-performance" />
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />
+    
+    <!-- Appender cho console -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    
+    <!-- Appender cho file chính với rotation -->
+    <appender name="FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS_PATH}/${LOG_FILE_NAME}.log</file>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        
+        <!-- Cấu hình rotation -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- Tên file khi rotation -->
+            <fileNamePattern>${LOGS_PATH}/${LOG_FILE_NAME}-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <!-- Kích thước tối đa của mỗi file -->
+            <maxFileSize>100MB</maxFileSize>
+            <!-- Lưu trữ file trong 30 ngày -->
+            <maxHistory>30</maxHistory>
+            <!-- Tổng kích thước tối đa của tất cả log files -->
+            <totalSizeCap>5GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+    
+    <!-- Appender cho file error riêng biệt -->
+    <appender name="ERROR-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS_PATH}/${LOG_FILE_NAME}-error.log</file>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        
+        <!-- Chỉ log các level ERROR và WARN -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+        </filter>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+        </filter>
+        
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS_PATH}/${LOG_FILE_NAME}-error-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>50MB</maxFileSize>
+            <maxHistory>60</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+    
+    <!-- Appender cho file performance monitoring -->
+    <appender name="PERFORMANCE-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS_PATH}/${LOG_FILE_NAME}-performance.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS_PATH}/${LOG_FILE_NAME}-performance-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>200MB</maxFileSize>
+            <maxHistory>15</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+    
+    <!-- Logger cho các package cụ thể -->
+    
+    <!-- Application packages - Cấu hình chi tiết cho từng package -->
+    
+    <!-- Config packages -->
+    <logger name="com.viettel.ems.perfomance.config" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+    
+    <!-- Main service packages -->
+    <logger name="com.viettel.ems.perfomance.service" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+    
+    <!-- Refactor service packages - chi tiết hơn -->
+    <logger name="com.viettel.ems.perfomance.service.refactor" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+    
+    <!-- Refactor worker packages -->
+    <logger name="com.viettel.ems.perfomance.service.refactor.worker" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+    
+    <!-- Refactor worker writer packages -->
+    <logger name="com.viettel.ems.perfomance.service.refactor.worker.writer" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+    
+    <!-- Refactor scanner packages -->
+    <logger name="com.viettel.ems.perfomance.service.refactor.scanner" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+    
+    <!-- Parser packages -->
+    <logger name="com.viettel.ems.perfomance.parser" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+    
+    <!-- Parser better packages -->
+    <logger name="com.viettel.ems.perfomance.parser.better" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+    
+    <!-- Repository packages -->
+    <logger name="com.viettel.ems.perfomance.repository" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+    
+    <!-- Object packages -->
+    <logger name="com.viettel.ems.perfomance.object" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+    
+    <!-- Object clickhouse packages -->
+    <logger name="com.viettel.ems.perfomance.object.clickhouse" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+    
+    <!-- Object ont packages -->
+    <logger name="com.viettel.ems.perfomance.object.ont" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+    
+    <!-- Common packages -->
+    <logger name="com.viettel.ems.perfomance.common" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+    
+    <!-- Performance monitoring -->
+    <logger name="com.viettel.ems.perfomance.performance" level="INFO" additivity="false">
+        <appender-ref ref="PERFORMANCE-FILE"/>
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <!-- Encryption -->
+    <logger name="com.viettel.ems.perfomance.encryption" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+    
+    <!-- Tools -->
+    <logger name="com.viettel.ems.perfomance.tools" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+    
+    <!-- Troubleshoot -->
+    <logger name="com.viettel.ems.perfomance.troubleshoot" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+    
+    <!-- Config kafka monitor -->
+    <logger name="com.viettel.ems.perfomance.config.kafkamonitor" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+    
+    <!-- Các thư viện bên ngoài - giảm level -->
+    <logger name="org.springframework" level="WARN" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+    
+    <logger name="org.apache.kafka" level="WARN" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+    
+    <logger name="com.zaxxer.hikari" level="WARN" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+    
+    <logger name="org.springframework.jdbc" level="WARN" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+    
+    <logger name="com.clickhouse" level="WARN" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+    
+    <logger name="org.apache.commons.net.ftp" level="WARN" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+    
+    <logger name="org.apache.curator" level="WARN" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+    
+    <!-- Root logger -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
+        <appender-ref ref="ERROR-FILE"/>
+    </root>
+    
+    <!-- Spring Profile configurations -->
+    <springProfile name="dev">
+        <logger name="com.viettel.ems.perfomance" level="DEBUG"/>
+        <logger name="org.springframework" level="DEBUG"/>
+    </springProfile>
+    
+    <springProfile name="prod">
+        <logger name="com.viettel.ems.perfomance" level="INFO"/>
+        <logger name="org.springframework" level="WARN"/>
+        <logger name="org.apache.kafka" level="ERROR"/>
+    </springProfile>
+    
+    <springProfile name="test">
+        <logger name="com.viettel.ems.perfomance" level="DEBUG"/>
+        <root level="WARN"/>
+    </springProfile>
+</configuration>

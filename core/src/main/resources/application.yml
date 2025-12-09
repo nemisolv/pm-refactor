@@ -1,0 +1,39 @@
+spring:
+  profiles:
+    active: system, kafka, 4ga, 5ga, 5gc, dbredis, task_crons
+    # active: system, kafka, 4ga, 5ga, 5gc, ont, dbredis, task_crons  # full modules
+server:
+  port: 8065
+input: AcsSystem
+
+# Cấu hình logging (sẽ được override bởi logback-spring.xml)
+logging:
+  config: classpath:logback-spring.xml
+  # Các cấu hình này sẽ được logback-spring.xml override
+  level:
+    root: INFO
+    # Application packages
+    com.viettel.ems.perfomance: INFO
+    com.viettel.ems.perfomance.config: INFO
+    com.viettel.ems.perfomance.service: INFO
+    com.viettel.ems.perfomance.service.refactor: DEBUG
+    com.viettel.ems.perfomance.service.refactor.worker: DEBUG
+    com.viettel.ems.perfomance.service.refactor.worker.writer: DEBUG
+    com.viettel.ems.perfomance.service.refactor.scanner: DEBUG
+    com.viettel.ems.perfomance.parser: DEBUG
+    com.viettel.ems.perfomance.parser.better: DEBUG
+    com.viettel.ems.perfomance.repository: INFO
+    com.viettel.ems.perfomance.object: INFO
+    com.viettel.ems.perfomance.object.clickhouse: INFO
+    com.viettel.ems.perfomance.object.ont: INFO
+    com.viettel.ems.perfomance.common: INFO
+    com.viettel.ems.perfomance.performance: INFO
+    com.viettel.ems.perfomance.encryption: INFO
+    com.viettel.ems.perfomance.tools: INFO
+    com.viettel.ems.perfomance.troubleshoot: INFO
+    com.viettel.ems.perfomance.config.kafkamonitor: INFO
+    # External libraries - reduced level
+    org.springframework: WARN
+    org.apache.kafka: WARN
+    com.zaxxer.hikari: WARN
+    com.clickhouse: WARN

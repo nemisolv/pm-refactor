@@ -1,0 +1,25 @@
+systemsapi:
+  configs:
+    SYSTEM_5GA:
+      datasources:
+        PRIMARY:
+          url: jdbc:mysql://localhost:3306/pm_access?useSSL=false&serverTimezone=UTC
+          username: root
+          password: nam123
+          driverClassName: com.mysql.cj.jdbc.Driver
+          maximumPoolSize: 15
+          connectionTimeoutMs: 60000
+        CLICKHOUSE:
+          url: jdbc:clickhouse://localhost:8123/pm_access
+          username: default
+          password: nam123
+          driverClassName: com.clickhouse.jdbc.ClickHouseDriver
+          maximumPoolSize: 10
+          connectionTimeoutMs: 60000
+      primaryDatasource: PRIMARY
+      deploy: true
+        # All values must follow camelCase styling.
+      custom:
+        dbType: clickhouse
+        isUsingCaching: false
+

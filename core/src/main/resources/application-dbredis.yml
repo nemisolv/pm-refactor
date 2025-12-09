@@ -1,0 +1,8 @@
+spring:
+  data:
+    redis:
+      host: 172.16.30.126
+      port: 8888
+      timeout: 5000
+      password: asdfsaf
+add-ne.redis-enable: false

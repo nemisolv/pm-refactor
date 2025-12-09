@@ -1,0 +1,8 @@
+ont-statistics-config:
+  counter-ids: 323,2323 ,2323,2323
+  aliases: max_mem, min_min...
+  extra-fields: ", , , ,..."
+  orders: 1,2,3,4,5,
+  view-names: "max min..."
+  queue-limit-size: 10000
+  ne-table-name: pm_ont_ne

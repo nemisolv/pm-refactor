@@ -1,0 +1,32 @@
+systems:
+  configs:
+    SYSTEM_5GA:
+      datasources:
+        PRIMARY:
+          url: jdbc:mysql://localhost:3306/pm_access?useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&cachePrepStmts=true
+          username: root
+          password: nam123
+          driverClassName: com.mysql.cj.jdbc.Driver
+          maximumPoolSize: 20
+          connectionTimeoutMs: 60000
+        CLICKHOUSE:
+          url: jdbc:clickhouse://localhost:8123/pm_access
+          username: default
+          password: nam123
+          driverClassName: com.clickhouse.jdbc.ClickHouseDriver
+          maximumPoolSize: 20
+          connectionTimeoutMs: 60000
+      primaryDatasource: PRIMARY
+      deploy: true
+      custom:
+        filesHandlingPerCycle: 20000
+        immediateRunDelaySecond: 10
+        scheduleScan: "59 */1 * * * *"
+        ftpDoneFolder: Done
+        isUsingClickhouse: true
+        isUsingMySQL: true
+        consumerThreads: 20
+        clickHouseDatabase: pm_access
+        isAutoAddingColumn: false
+        serviceName: 5ga     
+
